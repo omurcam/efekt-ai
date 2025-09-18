@@ -1,10 +1,13 @@
-
 "use client"
 
 import React, { useEffect, useRef } from "react"
 import * as THREE from "three"
 
-export function ShaderAnimation() {
+import { cn } from "@/lib/utils"
+
+type ShaderAnimationProps = React.HTMLAttributes<HTMLDivElement>
+
+export function ShaderAnimation({ className, style, ...props }: ShaderAnimationProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const sceneRef = useRef<{
     camera: THREE.Camera
@@ -137,11 +140,13 @@ export function ShaderAnimation() {
   return (
     <div
       ref={containerRef}
-      className="absolute top-0 left-0 w-full h-full"
+      className={cn("absolute top-0 left-0 h-full w-full", className)}
       style={{
         background: "#000",
         overflow: "hidden",
+        ...style,
       }}
+      {...props}
     />
   )
 }
